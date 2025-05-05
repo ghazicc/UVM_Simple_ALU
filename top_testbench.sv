@@ -1,8 +1,10 @@
+`include "uvm_pkg.sv"
 `include "uvm_macros.svh"
 import uvm_pkg::*;
 
 `include "Design/dut.sv"
 `include "Verification/interface.sv"
+`include "Verification/sequence_item.sv"
 `include "Verification/Sequences/addition_sequence.sv"
 `include "Verification/Sequences/subtraction_sequence.sv"
 `include "Verification/Sequences/division_sequence.sv"
@@ -14,9 +16,6 @@ import uvm_pkg::*;
 `include "Verification/Sequences/left_shift_sequence.sv"
 `include "Verification/Sequences/reset_sequence.sv"
 
-
-
-
 `include "Verification/sequencer.sv"
 `include "Verification/driver.sv"
 `include "Verification/monitor.sv"
@@ -26,11 +25,7 @@ import uvm_pkg::*;
 `include "Verification/base_test.sv"
 `include "Verification/operation_test.sv"
 
-
-
-
 module top;
-
 
   //Instantiation
   logic clock;
@@ -47,13 +42,10 @@ module top;
     .carry_out(intf.carry_out)
   );
 
-
-
   //Interface Setting
   initial begin
     uvm_config_db#(virtual ALU_interface)::set(null, "*", "vif", intf);
   end
-
 
   //Start The Test
   initial begin
@@ -75,13 +67,10 @@ module top;
     $finish();
   end
 
-
-  //   //Generate Waveforms
+  //Generate Waveforms
   initial begin
     $fsdbDumpfile("debug.fsdb");
     $fsdbDumpvars();
   end
-
-
 
 endmodule : top
