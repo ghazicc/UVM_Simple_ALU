@@ -2,7 +2,7 @@
 import uvm_pkg::*;
 
 `include "Design/dut.sv"
-`include "Verification/ALU_interface.sv"
+`include "Verification/interface.sv"
 `include "Verification/Sequences/addition_sequence.sv"
 `include "Verification/Sequences/subtraction_sequence.sv"
 `include "Verification/Sequences/division_sequence.sv"
@@ -17,14 +17,14 @@ import uvm_pkg::*;
 
 
 
-`include "Verification/ALU_sequencer.sv"
-`include "Verification/ALU_driver.sv"
-`include "Verification/ALU_monitor.sv"
-`include "Verification/ALU_agent.sv"
-`include "Verification/ALU_scoreboard.sv"
-`include "Verification/ALU_env.sv"
-`include "Verification/ALU_base_test.sv"
-`include "Verification/ALU_operation_test.sv"
+`include "Verification/sequencer.sv"
+`include "Verification/driver.sv"
+`include "Verification/monitor.sv"
+`include "Verification/agent.sv"
+`include "Verification/scoreboard.sv"
+`include "Verification/environment.sv"
+`include "Verification/base_test.sv"
+`include "Verification/operation_test.sv"
 
 
 

@@ -1,5 +1,4 @@
-
-interface alu_interface (input logic clock);
+interface ALU_interface (input logic clock);
  
 logic reset;
 //other inputs
