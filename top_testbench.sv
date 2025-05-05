@@ -1,20 +1,30 @@
 `include "uvm_macros.svh"
 import uvm_pkg::*;
 
-`include "Design/adder.sv"
-`include "TestBench/Adder_interface.sv"
-`include "TestBench/Adder_sequence_item.sv"
-`include "TestBench/Sequences/RESET_Sequence.sv"
-`include "TestBench/Sequences/Random_Sequence.sv"
+`include "Design/dut.sv"
+`include "Verification/ALU_interface.sv"
+`include "Verification/Sequences/addition_sequence.sv"
+`include "Verification/Sequences/subtraction_sequence.sv"
+`include "Verification/Sequences/division_sequence.sv"
+`include "Verification/Sequences/xor_sequence.sv"
+`include "Verification/Sequences/and_sequence.sv"
+`include "Verification/Sequences/or_sequence.sv"
+`include "Verification/Sequences/base_sequence.sv"
+`include "Verification/Sequences/right_shift_sequence.sv"
+`include "Verification/Sequences/left_shift_sequence.sv"
+`include "Verification/Sequences/reset_sequence.sv"
 
-`include "TestBench/Adder_sequencer.sv"
-`include "TestBench/Adder_driver.sv"
-`include "TestBench/Adder_monitor.sv"
-`include "TestBench/Adder_agent.sv"
-`include "TestBench/Adder_scoreboard.sv"
-`include "TestBench/Adder_env.sv"
-`include "TestBench/Adder_base_test.sv"
-`include "TestBench/Adder_operation_test.sv"
+
+
+
+`include "Verification/ALU_sequencer.sv"
+`include "Verification/ALU_driver.sv"
+`include "Verification/ALU_monitor.sv"
+`include "Verification/ALU_agent.sv"
+`include "Verification/ALU_scoreboard.sv"
+`include "Verification/ALU_env.sv"
+`include "Verification/ALU_base_test.sv"
+`include "Verification/ALU_operation_test.sv"
 
 
 
@@ -25,28 +35,29 @@ module top;
   //Instantiation
   logic clock;
 
-  Adder_interface intf (.clock(clock));
+  ALU_interface intf (.clock(clock));
 
-  adder dut (
-      .clk(intf.clock),
-      .reset(intf.reset),
-      .a(intf.a),
-      .b(intf.b),
-      .valid(intf.valid),
-      .c(intf.c)
+  ALU dut (
+    .clock(clock),
+    .reset(intf.reset),
+    .A(intf.a),
+    .B(intf.b),
+    .selection(intf.selection),
+    .result(intf.result),
+    .carry_out(intf.carry_out)
   );
 
 
 
   //Interface Setting
   initial begin
-    uvm_config_db#(virtual Adder_interface)::set(null, "*", "vif", intf);
+    uvm_config_db#(virtual ALU_interface)::set(null, "*", "vif", intf);
   end
 
 
   //Start The Test
   initial begin
-    run_test("Adder_Test");
+    run_test("ALU_Test");
   end
 
   //Clock Generation

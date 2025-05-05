@@ -4,12 +4,13 @@ class ALU_Test extends BaseTest;
     // 1. Component
     `uvm_component_utils(ALU_Test)
 
-
+    addition_sequence add_seq;
     string SEQ_NAME;
 
     // 2. Constructor
     function new(string name = "ALU_Test", uvm_component parent);
         super.new(name, parent);
+        add_seq = addition_sequence::type_id::create("add_seq");
     endfunction
 
     // 3. Build Phase
@@ -25,12 +26,12 @@ class ALU_Test extends BaseTest;
                     $display("\n");
                     reset_seq.start(env.agent.sequencer);
                     phase.drop_objection(this);
-        SEQ_NAME ="random_seq";
+        SEQ_NAME ="add_seq";
         case (SEQ_NAME)
-                "random_seq": begin
+                "add_seq": begin
                 phase.raise_objection(this);
                 $display("\n");
-                random_seq.start(env.agent.sequencer);
+                add_seq.start(env.agent.sequencer);
                 phase.drop_objection(this);
                 end
         endcase
