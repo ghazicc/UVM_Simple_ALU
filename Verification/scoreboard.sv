@@ -42,51 +42,123 @@ class ALU_scoreboard extends uvm_scoreboard;
     end
   endtask : run_phase
 
-  //9. Compare Function
   task compare(ALU_sequence_item trans);
     logic [8:0] actual_response;
     logic [8:0] predicted_response;
+    logic [7:0] ref_result;
+    logic ref_carry_out;
+    logic [2:0] shift_amount;
+    
+    // Capture actual response
     actual_response = {trans.carry_out, trans.result};
-    if(trans.reset) begin
-      predicted_response = 0;
-    end else if (trans.valid) begin
-      predicted_response = trans.a + trans.b; // to complete later !!!!
+    
+    // Reference model implementation
+    if (trans.reset) begin
+        predicted_response = 0;
+    end else begin
+        shift_amount = trans.b[2:0];
+        
+        unique case (trans.selection)
+            // Addition
+            4'b0000: begin
+                predicted_response = {1'b0, trans.a} + {1'b0, trans.b};
+            end
+            
+            // Subtraction
+            4'b0001: begin
+                predicted_response = {1'b0, trans.a} - {1'b0, trans.b};
+            end
+            
+            // Bitwise AND
+            4'b0010: begin
+                predicted_response = {1'b0, trans.a & trans.b};
+            end
+            
+            // Bitwise OR
+            4'b0011: begin
+                predicted_response = {1'b0, trans.a | trans.b};
+            end
+            
+            // Bitwise XOR
+            4'b0100: begin
+                predicted_response = {1'b0, trans.a ^ trans.b};
+            end
+            
+            // Division
+            4'b0101: begin
+                if (trans.b != 0) begin
+                    predicted_response = {1'b0, trans.a / trans.b};
+                end else begin
+                    predicted_response = {1'b1, 8'b0}; // Division by zero
+                end
+            end
+            
+            // Left shift
+            4'b0110: begin
+                if (shift_amount == 0) begin
+                    predicted_response = {1'b0, trans.a};
+                end else if (shift_amount <= 8) begin
+                    predicted_response = {trans.a[8 - shift_amount], trans.a << shift_amount};
+                end else begin
+                    predicted_response = 0;
+                end
+            end
+            
+            // Right shift
+            4'b0111: begin
+                if (shift_amount == 0) begin
+                    predicted_response = {1'b0, trans.a};
+                end else if (shift_amount <= 8) begin
+                    predicted_response = {trans.a[shift_amount - 1], trans.a >> shift_amount};
+                end else begin
+                    predicted_response = 0;
+                end
+            end
+            
+            // NAND
+            4'b1000: begin
+                predicted_response = {1'b0, ~(trans.a & trans.b)};
+            end
+            
+            // Default case
+            default: begin
+                predicted_response = 0;
+            end
+        endcase
     end
-  
-if (actual_response != predicted_response) begin
-  `uvm_error(get_type_name(), "✘ TEST FAILED ✘")
-  `uvm_info("Scoreboard", 
-            $sformatf("Actual Output    = %h\nPredicted Output = %h", 
-                      actual_response, predicted_response), 
+
+    // Comparison and reporting
+    if (actual_response != predicted_response) begin
+        `uvm_error(get_type_name(), "✘ TEST FAILED ✘")
+        `uvm_info("Scoreboard", 
+            $sformatf("Operation: %4b\nA: %0d, B: %0d\nActual: %h\nExpected: %h", 
+                     trans.selection, trans.a, trans.b, 
+                     actual_response, predicted_response), 
             UVM_NONE)
-  `uvm_info(get_type_name(), 
+        `uvm_info(get_type_name(), 
             "┌─────────────────────────────────────────────┐", 
             UVM_NONE)
-  `uvm_info(get_type_name(), 
+        `uvm_info(get_type_name(), 
             "│           ✘ Mismatch Detected ✘            │", 
             UVM_NONE)
-  `uvm_info(get_type_name(), 
+        `uvm_info(get_type_name(), 
             "└─────────────────────────────────────────────┘", 
             UVM_NONE)
+    end else begin
+        `uvm_info(get_type_name(), "✓ TEST PASSED ✓", UVM_NONE)
+        `uvm_info("Scoreboard", 
+            $sformatf("Operation: %4b\nA: %0d, B: %0d\nOutput: %h", 
+                     trans.selection, trans.a, trans.b, 
+                     actual_response), 
+            UVM_LOW)
+    end
+endtask : compare
 
-end else begin
-  `uvm_info(get_type_name(), "✓ TEST PASSED ✓", UVM_NONE)
-  `uvm_info("Scoreboard", 
-            $sformatf("Actual Output    = %h\nPredicted Output = %h", 
-                      actual_response, predicted_response), 
-            UVM_NONE)
-  `uvm_info(get_type_name(), 
-            "┌─────────────────────────────────────────────┐", 
-            UVM_NONE)
-  `uvm_info(get_type_name(), 
-            "│           ✓ Outputs Match ✓                │", 
-            UVM_NONE)
-  `uvm_info(get_type_name(), 
-            "└─────────────────────────────────────────────┘", 
-            UVM_NONE)
-end
-
-  endtask : compare
+  //9. Report Phase
+  function void report_phase(uvm_phase phase);
+    super.report_phase(phase);
+    `uvm_info(get_type_name(), "Scoreboard: All transactions processed", UVM_LOW)
+  endfunction : report_phase
 
 endclass : ALU_scoreboard
 
