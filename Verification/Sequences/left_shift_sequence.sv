@@ -17,8 +17,8 @@ class left_shift_sequence extends base_sequence;
       // Selection 0110 for Left Shift
       shift_item.selection = 4'b0110;
       shift_item.reset = 1'b0;
-      shift_item.A = 8'h01;     // Start with 1
-      shift_item.B = i & 8'h07; // Use only lower 3 bits for shift amount (0-7)
+      shift_item.a = 8'h01;     // Start with 1
+      shift_item.b = i & 8'h07; // Use only lower 3 bits for shift amount (0-7)
       
       finish_item(shift_item);
     end
@@ -28,8 +28,8 @@ class left_shift_sequence extends base_sequence;
     start_item(shift_item);
     shift_item.selection = 4'b0110;
     shift_item.reset = 1'b0;
-    shift_item.A = 8'h80;  // 1000 0000
-    shift_item.B = 8'h01;  // Shift by 1, should result in carry
+    shift_item.a = 8'h80;  // 1000 0000
+    shift_item.b = 8'h01;  // Shift by 1, should result in carry
     finish_item(shift_item);
   endtask
   

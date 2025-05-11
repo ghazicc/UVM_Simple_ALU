@@ -17,10 +17,10 @@ class division_sequence extends base_sequence;
       div_item.selection = 4'b0101;
       div_item.reset = 1'b0;
       
-      // Randomize A and B values, ensure B is not zero
+      // Randomize a and b values, ensure b is not zero
       if(!div_item.randomize() with { 
-        A inside {[0:255]}; 
-        B inside {[1:255]};  // Avoid division by zero
+        a inside {[0:255]}; 
+        b inside {[1:255]};  // Avoid division by zero
       }) begin
         `uvm_error(get_type_name(), "Randomization failed")
       end
@@ -33,8 +33,8 @@ class division_sequence extends base_sequence;
     start_item(div_item);
     div_item.selection = 4'b0101;
     div_item.reset = 1'b0;
-    div_item.A = 8'h0A;  // 10
-    div_item.B = 8'h00;  // Divide by zero
+    div_item.a = 8'h0A;  // 10
+    div_item.b = 8'h00;  // Divide by zero
     finish_item(div_item);
   endtask
   

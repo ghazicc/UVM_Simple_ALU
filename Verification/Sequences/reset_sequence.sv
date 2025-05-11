@@ -13,8 +13,8 @@ class reset_sequence extends base_sequence;
     start_item(reset_item);
     
     reset_item.reset = 1'b1;
-    reset_item.A = 8'h0;
-    reset_item.B = 8'h0;
+    reset_item.a = 8'h0;
+    reset_item.b = 8'h0;
     reset_item.selection = 4'h0;
     
     finish_item(reset_item);

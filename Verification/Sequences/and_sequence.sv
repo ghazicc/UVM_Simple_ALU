@@ -17,10 +17,10 @@ class and_sequence extends base_sequence;
       and_item.selection = 4'b0010;
       and_item.reset = 1'b0;
       
-      // Randomize A and B values
+      // Randomize a and b values
       if(!and_item.randomize() with { 
-        A inside {[0:255]}; 
-        B inside {[0:255]};
+        a inside {[0:255]}; 
+        b inside {[0:255]};
       }) begin
         `uvm_error(get_type_name(), "Randomization failed")
       end
@@ -33,8 +33,8 @@ class and_sequence extends base_sequence;
     start_item(and_item);
     and_item.selection = 4'b0010;
     and_item.reset = 1'b0;
-    and_item.A = 8'hFF;  // All 1s
-    and_item.B = 8'h0F;  // 0000 1111
+    and_item.a = 8'hFF;  // All 1s
+    and_item.b = 8'h0F;  // 0000 1111
     finish_item(and_item);
   endtask
   

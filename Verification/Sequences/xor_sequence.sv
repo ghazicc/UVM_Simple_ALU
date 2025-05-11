@@ -19,8 +19,8 @@ class xor_sequence extends base_sequence;
       
       // Randomize A and B values
       if(!xor_item.randomize() with { 
-        A inside {[0:255]}; 
-        B inside {[0:255]};
+        a inside {[0:255]}; 
+        b inside {[0:255]};
       }) begin
         `uvm_error(get_type_name(), "Randomization failed")
       end
@@ -33,8 +33,8 @@ class xor_sequence extends base_sequence;
     start_item(xor_item);
     xor_item.selection = 4'b0100;
     xor_item.reset = 1'b0;
-    xor_item.A = 8'hF0;  // 1111 0000
-    xor_item.B = 8'h0F;  // 0000 1111
+    xor_item.a = 8'hF0;  // 1111 0000
+    xor_item.b = 8'h0F;  // 0000 1111
     finish_item(xor_item);
   endtask
   
