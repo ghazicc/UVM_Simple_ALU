@@ -1,5 +1,3 @@
-
-
 class ALU_Test extends BaseTest;
     // 1. Component
     `uvm_component_utils(ALU_Test)
@@ -22,18 +20,9 @@ class ALU_Test extends BaseTest;
     // 4. Run Phase
     task run_phase(uvm_phase phase);
         super.run_phase(phase);
-                    phase.raise_objection(this);
-                    $display("\n");
-                    reset_seq.start(env.agent.sequencer);
-                    phase.drop_objection(this);
-        SEQ_NAME ="add_seq";
-        case (SEQ_NAME)
-                "add_seq": begin
-                phase.raise_objection(this);
-                $display("\n");
-                add_seq.start(env.agent.sequencer);
-                phase.drop_objection(this);
-                end
-        endcase
+        phase.raise_objection(this);
+        $display("\n");
+        add_seq.start(env.agent.sequencer);
+        phase.drop_objection(this);
     endtask
 endclass
