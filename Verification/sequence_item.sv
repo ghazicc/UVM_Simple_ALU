@@ -31,4 +31,4 @@ logic   carry_out;
   //4.Constraints (if needed)
 
 
-endclass : Adder_sequence_item
+endclass : ALU_sequence_item
