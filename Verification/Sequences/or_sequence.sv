@@ -1,4 +1,4 @@
-class or_sequence extends uvm_sequence #(or_item);
+class or_sequence extends uvm_sequence;
 
   `uvm_object_utils(or_sequence)
 
@@ -7,7 +7,7 @@ class or_sequence extends uvm_sequence #(or_item);
   endfunction
 
   task body();
-    or_item item;
+    ALU_sequence_item item;
     `uvm_info(get_type_name(), "Starting sequence", UVM_MEDIUM)
 
     // Create an or_item
