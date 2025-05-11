@@ -1,5 +1,4 @@
 import uvm_pkg::*;
-`include "uvm_macros.svh"
 
 `include "Design/dut.sv"
 `include "Verification/interface.sv"
