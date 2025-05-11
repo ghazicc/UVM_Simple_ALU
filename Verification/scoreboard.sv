@@ -95,24 +95,16 @@ class ALU_scoreboard extends uvm_scoreboard;
             
             // Left shift
             4'b0110: begin
-                if (shift_amount == 0) begin
-                    predicted_response = {1'b0, trans.a};
-                end else if (shift_amount <= 8) begin
-                    predicted_response = {trans.a[7 - shift_amount], trans.a << shift_amount};
-                end else begin
-                    predicted_response = 0;
-                end
+            
+                predicted_response = {trans.a[7 - shift_amount], trans.a << shift_amount};
+            
             end
             
             // Right shift
             4'b0111: begin
-                if (shift_amount == 0) begin
-                    predicted_response = {1'b0, trans.a};
-                end else if (shift_amount <= 8) begin
-                    predicted_response = {trans.a[shift_amount - 1], trans.a >> shift_amount};
-                end else begin
-                    predicted_response = 0;
-                end
+                
+                predicted_response = {trans.a[shift_amount - 1], trans.a >> shift_amount};
+                
             end
             
             // NAND
