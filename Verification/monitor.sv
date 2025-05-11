@@ -42,7 +42,7 @@ endfunction : connect_phase
             item.a = vif.a;
             item.b = vif.b;
             item.selection = vif.selection;
-            item.reset = vif.reset;
+            item.result = vif.result;
             item.carry_out = vif.carry_out;
 
         `uvm_info(get_type_name(), ("Monitor: Sending data to Scoreboard"), UVM_MEDIUM)
