@@ -15,13 +15,13 @@ class addition_sequence extends base_sequence;
       add_item = ALU_sequence_item::type_id::create("add_item");
       start_item(add_item);
       
-      // choose add operation
-      add_item.selection = 4'b0000;
-      add_item.reset = 1'b0;
+      
       
       if(!add_item.randomize() with { 
         a inside {[0:255]}; 
         b inside {[0:255]};
+        selection == 4'b0000;  // Ensure it's an addition operation
+        reset == 1'b0;        // Ensure reset is off
       }) begin
         `uvm_error(get_type_name(), "Randomization failed")
       end
