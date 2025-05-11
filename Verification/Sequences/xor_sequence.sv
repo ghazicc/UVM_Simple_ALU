@@ -17,7 +17,7 @@ class xor_sequence extends base_sequence;
       xor_item.selection = 4'b0100;
       xor_item.reset = 1'b0;
       
-      // Randomize A and B values
+      // Randomize a and b values
       if(!xor_item.randomize() with { 
         a inside {[0:255]}; 
         b inside {[0:255]};

@@ -20,6 +20,16 @@ class right_shift_sequence extends base_sequence;
       shift_item.a = 8'h80;     // Start with 1000 0000
       shift_item.b = i & 8'h07; // Use only lower 3 bits for shift amount (0-7)
       
+      // Randomize a and b values
+      if(!shift_item.randomize() with { 
+        a inside {[0:255]}; 
+        b inside {[0:255]};
+        selection == 4'b0111;
+        reset == 1'b0;
+      }) begin
+        `uvm_error(get_type_name(), "Randomization failed")
+      end
+      
       finish_item(shift_item);
     end
     
