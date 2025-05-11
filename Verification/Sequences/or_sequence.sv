@@ -11,7 +11,7 @@ class or_sequence extends uvm_sequence;
     `uvm_info(get_type_name(), "Starting sequence", UVM_MEDIUM)
 
     // Create an or_item
-    item = ALU_sequence::type_id::create("item");
+    item = ALU_sequence_item::type_id::create("item");
 
     // Randomize a and b values
     if(!item.randomize() with { 
