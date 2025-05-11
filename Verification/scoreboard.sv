@@ -48,6 +48,7 @@ class ALU_scoreboard extends uvm_scoreboard;
     logic [7:0] ref_result;
     logic ref_carry_out;
     logic [2:0] shift_amount;
+    logic [7:0] temp_result;
     
     // Capture actual response
     actual_response = {trans.carry_out, trans.result};
@@ -98,7 +99,8 @@ class ALU_scoreboard extends uvm_scoreboard;
                 if (shift_amount == 0) begin
                     predicted_response = {1'b0, trans.a};
                 end else if (shift_amount <= 8) begin
-                    predicted_response = {trans.a[8 - shift_amount], trans.a << shift_amount};
+                    temp_result = trans.a << shift_amount;
+                    predicted_response = {temp_result[7 - shift_amount], temp_result};
                 end else begin
                     predicted_response = 0;
                 end
@@ -109,7 +111,8 @@ class ALU_scoreboard extends uvm_scoreboard;
                 if (shift_amount == 0) begin
                     predicted_response = {1'b0, trans.a};
                 end else if (shift_amount <= 8) begin
-                    predicted_response = {trans.a[shift_amount - 1], trans.a >> shift_amount};
+                    temp_result = trans.a >> shift_amount;
+                    predicted_response = {temp_result[shift_amount - 1], temp_result};
                 end else begin
                     predicted_response = 0;
                 end
