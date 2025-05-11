@@ -7,10 +7,10 @@ class division_sequence extends base_sequence;
   endfunction
   
   virtual task body();
-    alu_seq_item div_item;
+    ALU_sequence_item div_item;
     
     repeat(10) begin
-      div_item = alu_seq_item::type_id::create("div_item");
+      div_item = ALU_sequence_item::type_id::create("div_item");
       start_item(div_item);
       
       // Selection 0101 for Division
@@ -29,7 +29,7 @@ class division_sequence extends base_sequence;
     end
     
     // Test division by zero scenario
-    div_item = alu_seq_item::type_id::create("div_item");
+    div_item = ALU_sequence_item::type_id::create("div_item");
     start_item(div_item);
     div_item.selection = 4'b0101;
     div_item.reset = 1'b0;

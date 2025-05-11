@@ -7,9 +7,9 @@ class reset_sequence extends base_sequence;
   endfunction
   
   virtual task body();
-    alu_seq_item reset_item;
+    ALU_sequence_item reset_item;
     
-    reset_item = alu_seq_item::type_id::create("reset_item");
+    reset_item = ALU_sequence_item::type_id::create("reset_item");
     start_item(reset_item);
     
     reset_item.reset = 1'b1;
@@ -20,7 +20,7 @@ class reset_sequence extends base_sequence;
     finish_item(reset_item);
     
     // De-assert reset after one cycle
-    reset_item = alu_seq_item::type_id::create("reset_item");
+    reset_item = ALU_sequence_item::type_id::create("reset_item");
     start_item(reset_item);
     
     reset_item.reset = 1'b0;

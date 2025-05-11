@@ -7,10 +7,10 @@ class xor_sequence extends base_sequence;
   endfunction
   
   virtual task body();
-    alu_seq_item xor_item;
+    ALU_sequence_item xor_item;
     
     repeat(10) begin
-      xor_item = alu_seq_item::type_id::create("xor_item");
+      xor_item = ALU_sequence_item::type_id::create("xor_item");
       start_item(xor_item);
       
       // Selection 0100 for XOR operation
@@ -29,7 +29,7 @@ class xor_sequence extends base_sequence;
     end
     
     // Test specific cases for XOR
-    xor_item = alu_seq_item::type_id::create("xor_item");
+    xor_item = ALU_sequence_item::type_id::create("xor_item");
     start_item(xor_item);
     xor_item.selection = 4'b0100;
     xor_item.reset = 1'b0;

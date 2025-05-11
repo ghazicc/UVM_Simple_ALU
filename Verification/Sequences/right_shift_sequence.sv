@@ -7,11 +7,11 @@ class right_shift_sequence extends base_sequence;
   endfunction
   
   virtual task body();
-    alu_seq_item shift_item;
+    ALU_sequence_item shift_item;
     
     // Test different shift amounts (0-7)
     for (int i = 0; i <= 7; i++) begin
-      shift_item = alu_seq_item::type_id::create("shift_item");
+      shift_item = ALU_sequence_item::type_id::create("shift_item");
       start_item(shift_item);
       
       // Selection 0111 for Right Shift
@@ -24,7 +24,7 @@ class right_shift_sequence extends base_sequence;
     end
     
     // Test carry out for right shift
-    shift_item = alu_seq_item::type_id::create("shift_item");
+    shift_item = ALU_sequence_item::type_id::create("shift_item");
     start_item(shift_item);
     shift_item.selection = 4'b0111;
     shift_item.reset = 1'b0;

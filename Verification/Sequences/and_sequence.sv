@@ -7,10 +7,10 @@ class and_sequence extends base_sequence;
   endfunction
   
   virtual task body();
-    alu_seq_item and_item;
+    ALU_sequence_item and_item;
     
     repeat(10) begin
-      and_item = alu_seq_item::type_id::create("and_item");
+      and_item = ALU_sequence_item::type_id::create("and_item");
       start_item(and_item);
       
       // Selection 0010 for AND operation
@@ -29,7 +29,7 @@ class and_sequence extends base_sequence;
     end
     
     // Test specific cases for AND
-    and_item = alu_seq_item::type_id::create("and_item");
+    and_item = ALU_sequence_item::type_id::create("and_item");
     start_item(and_item);
     and_item.selection = 4'b0010;
     and_item.reset = 1'b0;
