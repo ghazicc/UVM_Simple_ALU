@@ -21,6 +21,8 @@ class xor_sequence extends base_sequence;
       if(!xor_item.randomize() with { 
         a inside {[0:255]}; 
         b inside {[0:255]};
+        selection == 4'b0100;
+        reset == 1'b0;
       }) begin
         `uvm_error(get_type_name(), "Randomization failed")
       end

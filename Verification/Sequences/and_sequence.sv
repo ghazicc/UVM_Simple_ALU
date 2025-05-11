@@ -21,6 +21,8 @@ class and_sequence extends base_sequence;
       if(!and_item.randomize() with { 
         a inside {[0:255]}; 
         b inside {[0:255]};
+        selection == 4'b0010;
+        reset == 1'b0;
       }) begin
         `uvm_error(get_type_name(), "Randomization failed")
       end

@@ -21,6 +21,8 @@ class division_sequence extends base_sequence;
       if(!div_item.randomize() with { 
         a inside {[0:255]}; 
         b inside {[1:255]};  // Avoid division by zero
+        selection == 4'b0101;
+        reset == 1'b0;
       }) begin
         `uvm_error(get_type_name(), "Randomization failed")
       end
