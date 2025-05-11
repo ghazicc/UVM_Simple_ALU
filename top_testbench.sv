@@ -31,7 +31,7 @@ module top;
   ALU_interface intf (.clock(clock));
 
   ALU dut (
-    .clock(clock),
+    .clk(clock), // corrected from .clock(clock)
     .reset(intf.reset),
     .A(intf.a),
     .B(intf.b),
