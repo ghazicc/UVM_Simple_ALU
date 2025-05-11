@@ -25,7 +25,7 @@ logic   carry_out;
     input b;
     input selection;
     input result;
-    input carry_out    
+    input carry_out;
   endclocking
 
   modport driver(clocking drv, input clock);
