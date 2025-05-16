@@ -147,9 +147,9 @@ class ALU_scoreboard extends uvm_scoreboard;
     end else begin
         `uvm_info(get_type_name(), "✓ TEST PASSED ✓", UVM_NONE)
         `uvm_info("Scoreboard", 
-            $sformatf("Operation: %4b\nA: %0d, B: %0d\nOutput: %h", 
+            $sformatf("Operation: %4b\nA: %0d, B: %0d\nActual: %h, Predicted: %h", 
                      trans.selection, trans.a, trans.b, 
-                     actual_response), 
+                     actual_response, predicted_response), 
             UVM_LOW)
     end
 endtask : compare
