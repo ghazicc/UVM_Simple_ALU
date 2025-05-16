@@ -13,6 +13,7 @@ import uvm_pkg::*;
 `include "Verification/Sequences/right_shift_sequence.sv"
 `include "Verification/Sequences/left_shift_sequence.sv"
 `include "Verification/Sequences/reset_sequence.sv"
+`include "Verification/Sequences/default_sequence.sv"
 
 `include "Verification/sequencer.sv"
 `include "Verification/driver.sv"
