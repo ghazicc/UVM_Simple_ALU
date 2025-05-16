@@ -40,7 +40,7 @@ class ALU_Test extends BaseTest;
         super.run_phase(phase);
         phase.raise_objection(this);
         $display("\n");
-        default_seq.start(env.agent.sequencer);
+        
         add_seq.start(env.agent.sequencer);
         sub_seq.start(env.agent.sequencer);
         div_seq.start(env.agent.sequencer);
@@ -49,6 +49,7 @@ class ALU_Test extends BaseTest;
         xor_seq.start(env.agent.sequencer);
         lshift_seq.start(env.agent.sequencer);
         rshift_seq.start(env.agent.sequencer);
+        default_seq.start(env.agent.sequencer);
         rst_seq.start(env.agent.sequencer);
         phase.drop_objection(this);
     endtask
