@@ -11,7 +11,7 @@ class ALU_Test extends BaseTest;
     left_shift_sequence lshift_seq;
     right_shift_sequence rshift_seq;
     reset_sequence rst_seq;
-    default_sequence default_sequence;
+    default_sequence default_seq;
     string SEQ_NAME;
 
     // 2. Constructor
@@ -26,7 +26,7 @@ class ALU_Test extends BaseTest;
         lshift_seq = left_shift_sequence::type_id::create("lshift_seq");
         rshift_seq = right_shift_sequence::type_id::create("rshift_seq");
         rst_seq = reset_sequence::type_id::create("rst_seq");
-        default_sequence = default_sequence::type_id::get();
+        default_seq = default_sequence::type_id::create("default_seq");
     endfunction
 
     // 3. Build Phase
@@ -49,7 +49,7 @@ class ALU_Test extends BaseTest;
         lshift_seq.start(env.agent.sequencer);
         rshift_seq.start(env.agent.sequencer);
         rst_seq.start(env.agent.sequencer);
-        default_sequence.start(env.agent.sequencer);
+        default_seq.start(env.agent.sequencer);
         phase.drop_objection(this);
     endtask
 endclass

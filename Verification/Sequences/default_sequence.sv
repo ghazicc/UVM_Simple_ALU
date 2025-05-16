@@ -20,12 +20,11 @@ class default_sequence extends base_sequence;
       if(!default_item.randomize() with { 
         a inside {[0:255]}; 
         b inside {[0:255]};
-        selection inside {[8:15]};
+        selection inside {[9:15]};  // Use undefined operation codes (0-8 are defined)
+        reset == 1'b0;              // Ensure reset is off
       }) begin
         `uvm_error(get_type_name(), "Randomization failed")
       end
-      
-      default_item.reset = 1'b0; // Ensure reset is off
 
       finish_item(default_item);
     end
