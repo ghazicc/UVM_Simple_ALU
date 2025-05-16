@@ -128,7 +128,7 @@ class ALU_scoreboard extends uvm_scoreboard;
     end
 
     // Comparison and reporting
-    if (actual_response != predicted_response) begin
+    if (actual_response !== predicted_response) begin
         `uvm_error(get_type_name(), "✘ TEST FAILED ✘")
         `uvm_info("Scoreboard", 
             $sformatf("Operation: %4b\nA: %0d, B: %0d\nActual: %h\nExpected: %h", 
