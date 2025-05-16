@@ -1,0 +1,48 @@
+# Test lists
+# UVM Simple ALU Verification Sequences
+
+1. Addition Operation (addition_sequence.sv)
+   - Random addition tests
+   - Different signs test (positive + negative)
+   - Same signs test (both positive)
+   - Two negatives test (both negative)
+   - Max plus max test (overflow)
+   - Max negative plus max negative test (overflow)
+   - Max plus random test
+   - Max negative plus random test
+
+2. Subtraction Operation (subtraction_sequence.sv)
+   - Random subtraction tests
+   - A greater than B test
+   - A less than B test
+   - A equal to B test
+
+3. Bitwise AND Operation (and_sequence.sv)
+   - Random AND tests
+   - Specific case tests (all 1's AND with pattern)
+
+4. Bitwise OR Operation (or_sequence.sv)
+   - Random OR tests
+   - Specific case tests
+
+5. Bitwise XOR Operation (xor_sequence.sv)
+   - Random XOR tests
+   - Specific case tests
+
+6. Division Operation (division_sequence.sv)
+   - Random division tests
+   - Division by zero test
+
+7. Left Shift Operation (left_shift_sequence.sv)
+   - Tests for different shift amounts (0-7)
+   - Carry out test for left shift
+
+8. Right Shift Operation (right_shift_sequence.sv)
+   - Tests for different shift amounts (0-7)
+   - Carry out test for right shift
+
+9. Reset Operation (reset_sequence.sv)
+   - Reset functionality tests
+
+10. Default Sequence
+    - Default operation tests
