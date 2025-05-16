@@ -1,5 +1,4 @@
 # Test lists
-# UVM Simple ALU Verification Sequences
 
 1. Addition Operation (addition_sequence.sv)
    - Random addition tests
@@ -46,3 +45,10 @@
 
 10. Default Sequence
     - Default operation tests
+
+
+
+# Bugs Detected:
+1. Right shift does not check for the shift amount.
+2. Left shift does not check for the shift amount.
+3. Default case in the DUT does not set the carry out to zero.
